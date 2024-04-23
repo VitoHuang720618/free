@@ -1,9 +1,12 @@
 package user
 
 import (
+	"context"
 	"net/http"
 
-	"micro/gin-server/internal/svc"
+	"free/gin-server/internal/svc"
+
+	grpc_server "free/proto/grpc-server"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,8 +22,18 @@ func NewLogin(svc *svc.Services) *Login {
 }
 
 func (l *Login) Login(g *gin.Context) {
+	// a, e := l.svc.LoginRpc.CheckSession(context.Background(), &grpc_server.LogingRequest{})
+	s, err := l.svc.LoginRpc.Login(context.Background(), &grpc_server.LogingRequest{
+		Username: "ooo",
+		Passwd:   "oooo",
+	})
+	if err != nil {
+		g.JSON(http.StatusOK, gin.H{
+			"message": err.Error(),
+		})
+	}
 	g.JSON(http.StatusOK, gin.H{
-		"message": "login function !!",
+		"is login :": s.IsLogin,
 	})
 }
 

@@ -1,8 +1,8 @@
 package app
 
 import (
-	"micro/grpc-server/internal/svc"
-	grpc_server "micro/proto/grpc-server"
+	"free/grpc-server/internal/svc"
+	grpc_server "free/proto/grpc-server"
 )
 
 type LoginLogic struct {

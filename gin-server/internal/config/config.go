@@ -1,5 +1,9 @@
 package config
 
+import (
+	"github.com/zeromicro/go-zero/zrpc"
+)
+
 type Config struct {
 	// rest.RestConf
 	Name string
@@ -26,4 +30,5 @@ type Config struct {
 		Key   string
 		Hosts []string
 	}
+	Login zrpc.RpcClientConf
 }

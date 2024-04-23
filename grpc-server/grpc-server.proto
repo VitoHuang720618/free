@@ -18,6 +18,9 @@ message PongResponse {
 
 service Login {
     rpc Login (LogingRequest) returns (LoginResponse);
+    rpc Logout (Empty) returns (LoginResponse);
+    rpc CheckSession (LogingRequest) returns (LoginResponse);
+
 }
 message LogingRequest {
     string username = 1;
@@ -27,3 +30,5 @@ message LogingRequest {
 message LoginResponse {
     bool is_login = 1;
 }
+
+message Empty {}

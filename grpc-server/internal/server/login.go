@@ -3,10 +3,10 @@ package server
 import (
 	"context"
 
-	"micro/grpc-server/internal/app"
-	"micro/grpc-server/internal/svc"
+	"free/grpc-server/internal/app"
+	"free/grpc-server/internal/svc"
 
-	grpc_server "micro/proto/grpc-server"
+	grpc_server "free/proto/grpc-server"
 )
 
 type LoginServer struct {

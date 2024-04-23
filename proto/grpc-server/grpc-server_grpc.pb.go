@@ -109,6 +109,8 @@ var Health_ServiceDesc = grpc.ServiceDesc{
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LoginClient interface {
 	Login(ctx context.Context, in *LogingRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	Logout(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*LoginResponse, error)
+	CheckSession(ctx context.Context, in *LogingRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 }
 
 type loginClient struct {
@@ -128,11 +130,31 @@ func (c *loginClient) Login(ctx context.Context, in *LogingRequest, opts ...grpc
 	return out, nil
 }
 
+func (c *loginClient) Logout(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*LoginResponse, error) {
+	out := new(LoginResponse)
+	err := c.cc.Invoke(ctx, "/Login/Logout", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *loginClient) CheckSession(ctx context.Context, in *LogingRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+	out := new(LoginResponse)
+	err := c.cc.Invoke(ctx, "/Login/CheckSession", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LoginServer is the server API for Login service.
 // All implementations must embed UnimplementedLoginServer
 // for forward compatibility
 type LoginServer interface {
 	Login(context.Context, *LogingRequest) (*LoginResponse, error)
+	Logout(context.Context, *Empty) (*LoginResponse, error)
+	CheckSession(context.Context, *LogingRequest) (*LoginResponse, error)
 	mustEmbedUnimplementedLoginServer()
 }
 
@@ -142,6 +164,12 @@ type UnimplementedLoginServer struct {
 
 func (UnimplementedLoginServer) Login(context.Context, *LogingRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (UnimplementedLoginServer) Logout(context.Context, *Empty) (*LoginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
+}
+func (UnimplementedLoginServer) CheckSession(context.Context, *LogingRequest) (*LoginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckSession not implemented")
 }
 func (UnimplementedLoginServer) mustEmbedUnimplementedLoginServer() {}
 
@@ -174,6 +202,42 @@ func _Login_Login_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Login_Logout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LoginServer).Logout(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Login/Logout",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LoginServer).Logout(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Login_CheckSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LogingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LoginServer).CheckSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Login/CheckSession",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LoginServer).CheckSession(ctx, req.(*LogingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Login_ServiceDesc is the grpc.ServiceDesc for Login service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -184,6 +248,14 @@ var Login_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Login",
 			Handler:    _Login_Login_Handler,
+		},
+		{
+			MethodName: "Logout",
+			Handler:    _Login_Logout_Handler,
+		},
+		{
+			MethodName: "CheckSession",
+			Handler:    _Login_CheckSession_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -23,3 +23,9 @@ Etcd:
     - "127.0.0.1:6379"
     - "127.0.0.1:6377"
     - "127.0.0.1:6376"
+
+Login:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: type.rpc

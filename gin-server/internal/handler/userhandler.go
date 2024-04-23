@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"micro/gin-server/internal/app/user"
-	"micro/gin-server/internal/svc"
+	"free/gin-server/internal/app/user"
+	"free/gin-server/internal/svc"
 
 	"github.com/gin-gonic/gin"
 )

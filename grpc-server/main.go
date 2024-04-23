@@ -3,12 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"free/grpc-server/internal/server"
+	"free/grpc-server/internal/svc"
+	grpc_server "free/proto/grpc-server"
 
-	"micro/grpc-server/internal/config"
-	"micro/grpc-server/internal/server"
-	"micro/grpc-server/internal/svc"
-
-	grpc_server "micro/proto/grpc-server"
+	"free/grpc-server/internal/config"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/zrpc"

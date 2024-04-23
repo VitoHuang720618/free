@@ -3,10 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"free/gin-server/internal/config"
+	"free/gin-server/internal/handler"
+	"free/gin-server/internal/svc"
 
-	"micro/gin-server/internal/config"
-	"micro/gin-server/internal/handler"
-	"micro/gin-server/internal/svc"
+	// "free/gin-server/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 )
@@ -22,6 +23,7 @@ var configFile = flag.String("f", "./etc/ginserver.yaml", "the config file")
 func main() {
 	flag.Parse()
 
+	// var c config.Config
 	var c config.Config
 
 	conf.MustLoad(*configFile, &c)
