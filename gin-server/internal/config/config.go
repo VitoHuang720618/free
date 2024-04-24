@@ -10,15 +10,8 @@ type Config struct {
 	Host string
 	Port string
 
-	WagersDB struct {
-		Master string
-		Slave  string
-	}
-
-	GameDB struct {
-		Master string
-		Slave  string
-	}
+	// db
+	DB MySQL
 
 	Redis struct {
 		Host     string

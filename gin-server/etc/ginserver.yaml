@@ -3,13 +3,13 @@ Host: 0.0.0.0
 Port: :8080
 
 # DB
-WagersDB:
-  Master: root:yourPwd@tcp(127.0.0.1:3306)/Demo?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
-  Slave: root:yourPwd@tcp(127.0.0.1:3306)/Demo?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
-
-GameDB:
-  Master: root:yourPwd@tcp(127.0.0.1:3306)/Demo?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
-  Slave: root:yourPwd@tcp(127.0.0.1:3306)/Demo?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+DB:
+  WagersDB:
+    Master: root:yourPwd@tcp(127.0.0.1:3306)/Demo?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+    Slave: root:yourPwd@tcp(127.0.0.1:3306)/Demo?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  GameDB:
+    Master: root:yourPwd@tcp(127.0.0.1:3306)/Demo?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+    Slave: root:yourPwd@tcp(127.0.0.1:3306)/Demo?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
 
 # Redis
 Redis:

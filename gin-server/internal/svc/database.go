@@ -2,38 +2,29 @@ package svc
 
 import (
 	"fmt"
-	"free/gin-server/internal/config"
 
-	// "free/grpc-server/internal/config"
+	"free/gin-server/internal/config"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
-type Mysql struct {
-	GameDB struct {
-		Master *gorm.DB
-		Slave  *gorm.DB
+type MySqlClient struct {
+	GameMaster *gorm.DB
+	GameSlave  *gorm.DB
+}
+
+func NewMySqlClient(c config.Config) *MySqlClient {
+	return &MySqlClient{
+		GameMaster: newMySql(c.DB.GameDB.Master),
+		GameSlave:  newMySql(c.DB.GameDB.Slave),
 	}
 }
 
-func NewMysql(c config.Config) *Mysql {
-	gm, err := gorm.Open(mysql.Open(c.GameDB.Master), &gorm.Config{})
+func newMySql(dsn string) *gorm.DB {
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		fmt.Println("Game db master connect error !! ：", err.Error())
+		fmt.Println("Failed to initialize MySQL databases : ", err)
 	}
-
-	gs, err := gorm.Open(mysql.Open(c.GameDB.Slave), &gorm.Config{})
-	if err != nil {
-		fmt.Println("Game db slave connect error !! ：", err.Error())
-	}
-	return &Mysql{
-		GameDB: struct {
-			Master *gorm.DB
-			Slave  *gorm.DB
-		}{
-			Master: gm,
-			Slave:  gs,
-		},
-	}
+	return db
 }
