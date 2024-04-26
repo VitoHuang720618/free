@@ -20,10 +20,15 @@ func RegisterHandlers(svcCtx *svc.ServiceContext) *gin.Engine {
 		Router: []IRouter{
 			// add here
 			NewShopRouter(svcCtx),
-			NewUserRouter(svcCtx),
+			NewUserHnadler(svcCtx),
 		},
 	}
-	app.registerHandlers(r)
+
+	for _, handler := range app.Router {
+		handler.Register(r)
+	}
+
+	// app.registerHandlers(r)
 	return r
 }
 

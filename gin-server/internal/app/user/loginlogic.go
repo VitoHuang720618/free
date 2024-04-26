@@ -6,33 +6,37 @@ import (
 
 	"free/gin-server/internal/svc"
 
-	grpc_server "free/proto/grpc-server"
-
 	"github.com/gin-gonic/gin"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type Login struct {
+type Loginlogic struct {
+	logx.Logger
+	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewLogin(svcCtx *svc.ServiceContext) *Login {
-	return &Login{
+func NewLoginlogic(ctx context.Context, svcCtx *svc.ServiceContext) *Loginlogic {
+	return &Loginlogic{
+		Logger: logx.WithContext(ctx),
+		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *Login) Login(g *gin.Context) {
-	s, err := l.svcCtx.LoginRpc.Login(context.Background(), &grpc_server.LogingRequest{
-		Username: "ooo",
-		Passwd:   "oooo",
-	})
-	if err != nil {
-		g.JSON(http.StatusOK, gin.H{
-			"message": err.Error(),
-		})
-	}
+func (l *Loginlogic) Login(g *gin.Context) {
+	l.Logger.Info("Hello World")
+	// s, err := l.svcCtx.LoginRpc.Login(context.Background(), &grpc_server.LogingRequest{
+	// 	Username: "ooo",
+	// 	Passwd:   "oooo",
+	// })
+	// if err != nil {
+	// 	g.JSON(http.StatusOK, gin.H{
+	// 		"message": err.Error(),
+	// 	})
+	// }
 	g.JSON(http.StatusOK, gin.H{
-		"is login :": s.IsLogin,
+		"is login :": "Hello",
 	})
 }
 

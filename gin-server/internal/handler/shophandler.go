@@ -18,9 +18,10 @@ func NewShopRouter(svcCtx *svc.ServiceContext) *Shop {
 }
 
 func (l *Shop) Register(g *gin.Engine) {
+
 	group := g.Group("/shop")
 	{
-		s := shop.NewOrderStruct(l.svcCtx)
+		s := shop.NewOrderLogic(&gin.Context{}, l.svcCtx)
 		group.GET("/order", s.Order)
 	}
 }
