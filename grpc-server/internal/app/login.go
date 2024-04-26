@@ -1,6 +1,7 @@
 package app
 
 import (
+	"context"
 	"free/grpc-server/internal/svc"
 	grpc_server "free/proto/grpc-server"
 )
@@ -10,13 +11,13 @@ type LoginServer struct {
 	grpc_server.UnimplementedLoginServer
 }
 
-func NewLogin(svc *svc.Services) *LoginLogic {
-	return &LoginLogic{
+func NewLogin(svc *svc.Services) *LoginServer {
+	return &LoginServer{
 		svc: svc,
 	}
 }
 
-func (l *LoginLogic) Login(ctx contex.Context, in *grpc_server.LogingRequest) (*grpc_server.LoginResponse, error) {
+func (l *LoginServer) Login(ctx context.Context, in *grpc_server.LogingRequest) (*grpc_server.LoginResponse, error) {
 	return &grpc_server.LoginResponse{
 		IsLogin: true,
 	}, nil

@@ -30,6 +30,7 @@ func main() {
 
 	svc := svc.NewServices(c)
 	//api 會很多，比regist 在main裡
+	//共用的往grpc-server丟
 	r := handler.RegisterHandlers(svc)
 
 	fmt.Printf("Starting server at %s:%s...\n", c.Host, c.Port)
