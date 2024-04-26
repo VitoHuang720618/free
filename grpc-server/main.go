@@ -31,7 +31,7 @@ func main() {
 		//
 		// create proto 語法 + protoc --go_out=./proto --go-grpc_out=./proto ./grpc-server/grpc-server.proto
 		// grpc_server.RegisterHealthServer(grpcServer, app.NewPing(svc))
-		grpc_server.RegisterLoginServer(grpcServer, app.NewLogin(svc))
+		grpc_server.RegisterLoginServer(grpcServer, app.NewLoginServer(svc))
 		grpc_server.RegisterHealthServer(grpcServer, app.NewHealthServer(svc))
 	})
 	defer s.Stop()

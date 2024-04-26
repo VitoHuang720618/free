@@ -29,7 +29,7 @@ func main() {
 	conf.MustLoad(*configFile, &c)
 
 	svc := svc.NewServices(c)
-	//api 會很多，比regist 在main裡
+	//api 會很多，別regist 在main裡
 	//共用的往grpc-server丟
 	r := handler.RegisterHandlers(svc)
 
