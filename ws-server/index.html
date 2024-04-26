@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket 連線範例</title>
+    <script type="text/javascript">
+        var ws = new WebSocket("ws://127.0.0.1:8787/login");
+
+        // 當 WebSocket 連接建立時執行
+        ws.onopen = function() {
+            console.log("WebSocket 連線已建立。");
+        };
+
+        // 當收到 WebSocket 伺服器傳來的訊息時執行
+        ws.onmessage = function(event) {
+            console.log("收到伺服器訊息：" + event.data);
+        };
+
+        // 當 WebSocket 連接關閉時執行
+        ws.onclose = function() {
+            console.log("WebSocket 連線已關閉。");
+        };
+
+        // 當發生錯誤時執行
+        ws.onerror = function(error) {
+            console.log("WebSocket 錯誤：" + error);
+        };
+
+        // 送出訊息到 WebSocket 伺服器
+        function sendMessage() {
+            var message = document.getElementById("message").value;
+            ws.send(message);
+            console.log("已送出訊息：" + message);
+        }
+    </script>
+</head>
+<body>
+    <h1>WebSocket 連線範例</h1>
+    <input type="text" id="message" placeholder="輸入訊息">
+    <button onclick="sendMessage()">送出訊息</button>
+</body>
+</html>

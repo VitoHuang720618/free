@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"free/grpc-server/internal/server"
+	"free/grpc-server/internal/app"
 	"free/grpc-server/internal/svc"
 	grpc_server "free/proto/grpc-server"
 
@@ -26,9 +26,12 @@ func main() {
 	svc := svc.NewServices(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		// register grpc server ---> 在server/底下
-		grpc_server.RegisterHealthServer(grpcServer, server.NewHealth(svc))
-		grpc_server.RegisterLoginServer(grpcServer, server.NewLogin(svc))
+		// register grpc server ---> 在app/底下
+		// proto 在proto/grpc-server 底下
+		//
+		// create proto 語法 + protoc --go_out=./proto --go-grpc_out=./proto ./grpc-server/grpc-server.proto
+		grpc_server.RegisterHealthServer(grpcServer, app.NewPing(svc))
+		grpc_server.RegisterLoginServer(grpcServer, app.NewLogin(svc))
 	})
 	defer s.Stop()
 

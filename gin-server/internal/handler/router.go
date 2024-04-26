@@ -16,7 +16,6 @@ type App struct {
 
 func RegisterHandlers(svc *svc.Services) *gin.Engine {
 	r := gin.Default()
-
 	app := &App{
 		Router: []IRouter{
 			// add here
@@ -24,9 +23,7 @@ func RegisterHandlers(svc *svc.Services) *gin.Engine {
 			NewUserRouter(svc),
 		},
 	}
-
 	app.registerHandlers(r)
-
 	return r
 }
 

@@ -5,17 +5,18 @@ import (
 	grpc_server "free/proto/grpc-server"
 )
 
-type LoginLogic struct {
+type LoginServer struct {
 	svc *svc.Services
+	grpc_server.UnimplementedLoginServer
 }
 
-func NewLoginLogic(svc *svc.Services) *LoginLogic {
+func NewLogin(svc *svc.Services) *LoginLogic {
 	return &LoginLogic{
 		svc: svc,
 	}
 }
 
-func (l *LoginLogic) Login(in *grpc_server.LogingRequest) (*grpc_server.LoginResponse, error) {
+func (l *LoginLogic) Login(ctx contex.Context, in *grpc_server.LogingRequest) (*grpc_server.LoginResponse, error) {
 	return &grpc_server.LoginResponse{
 		IsLogin: true,
 	}, nil

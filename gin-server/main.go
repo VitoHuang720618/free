@@ -29,7 +29,7 @@ func main() {
 	conf.MustLoad(*configFile, &c)
 
 	svc := svc.NewServices(c)
-
+	//api 會很多，比regist 在main裡
 	r := handler.RegisterHandlers(svc)
 
 	fmt.Printf("Starting server at %s:%s...\n", c.Host, c.Port)
