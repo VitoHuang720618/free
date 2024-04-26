@@ -16,13 +16,13 @@ type LoginServer interface {
 */
 
 type LoginServer struct {
-	svc *svc.Services
+	svcCtx *svc.ServiceContext
 	grpc_server.UnimplementedLoginServer
 }
 
-func NewLoginServer(svc *svc.Services) *LoginServer {
+func NewLoginServer(svcCtx *svc.ServiceContext) *LoginServer {
 	return &LoginServer{
-		svc: svc,
+		svcCtx: svcCtx,
 	}
 }
 

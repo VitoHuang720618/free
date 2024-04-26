@@ -9,13 +9,13 @@ import (
 	"gorm.io/gorm"
 )
 
-type MySqlClient struct {
+type MySqlContext struct {
 	GameMaster *gorm.DB
 	GameSlave  *gorm.DB
 }
 
-func NewMySqlClient(c config.Config) *MySqlClient {
-	return &MySqlClient{
+func NewMySqlClient(c config.Config) *MySqlContext {
+	return &MySqlContext{
 		GameMaster: newMySql(c.DB.GameDB.Master),
 		GameSlave:  newMySql(c.DB.GameDB.Slave),
 	}

@@ -8,19 +8,19 @@ import (
 )
 
 type Shop struct {
-	svc *svc.Services
+	svcCtx *svc.ServiceContext
 }
 
-func NewShopRouter(svc *svc.Services) *Shop {
+func NewShopRouter(svcCtx *svc.ServiceContext) *Shop {
 	return &Shop{
-		svc: svc,
+		svcCtx: svcCtx,
 	}
 }
 
 func (l *Shop) Register(g *gin.Engine) {
 	group := g.Group("/shop")
 	{
-		s := shop.NewOrderStruct(l.svc)
+		s := shop.NewOrderStruct(l.svcCtx)
 		group.GET("/order", s.Order)
 	}
 }

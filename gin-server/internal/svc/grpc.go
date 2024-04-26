@@ -1,3 +1,1 @@
 package svc
-
-func registGrpc() {}

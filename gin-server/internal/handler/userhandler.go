@@ -8,25 +8,25 @@ import (
 )
 
 type User struct {
-	svc *svc.Services
+	svcCtx *svc.ServiceContext
 }
 
-func NewUserRouter(svc *svc.Services) *User {
+func NewUserRouter(svcCtx *svc.ServiceContext) *User {
 	return &User{
-		svc: svc,
+		svcCtx: svcCtx,
 	}
 }
 
 func (l *User) Register(g *gin.Engine) {
 	group := g.Group("/user")
 	{
-		login := user.NewLogin(l.svc)
+		login := user.NewLogin(l.svcCtx)
 		group.GET("/login", login.Login)
 
 		//v := user.NewLogout(l.svc)
 		//
 		//group.GET("/logut", v.Logout)
-		logout := user.NewLogout(l.svc)
+		logout := user.NewLogout(l.svcCtx)
 		group.GET("/logout", logout.Logout)
 	}
 }

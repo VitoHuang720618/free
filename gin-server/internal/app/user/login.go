@@ -12,17 +12,17 @@ import (
 )
 
 type Login struct {
-	svc *svc.Services
+	svcCtx *svc.ServiceContext
 }
 
-func NewLogin(svc *svc.Services) *Login {
+func NewLogin(svcCtx *svc.ServiceContext) *Login {
 	return &Login{
-		svc: svc,
+		svcCtx: svcCtx,
 	}
 }
 
 func (l *Login) Login(g *gin.Context) {
-	s, err := l.svc.LoginRpc.Login(context.Background(), &grpc_server.LogingRequest{
+	s, err := l.svcCtx.LoginRpc.Login(context.Background(), &grpc_server.LogingRequest{
 		Username: "ooo",
 		Passwd:   "oooo",
 	})

@@ -23,7 +23,7 @@ func main() {
 
 	conf.MustLoad(*configFile, &c)
 
-	svc := svc.NewServices(c)
+	svcCtx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		// register grpc server ---> 在app/底下
@@ -31,8 +31,8 @@ func main() {
 		//
 		// create proto 語法 + protoc --go_out=./proto --go-grpc_out=./proto ./grpc-server/grpc-server.proto
 		// grpc_server.RegisterHealthServer(grpcServer, app.NewPing(svc))
-		grpc_server.RegisterLoginServer(grpcServer, app.NewLoginServer(svc))
-		grpc_server.RegisterHealthServer(grpcServer, app.NewHealthServer(svc))
+		grpc_server.RegisterLoginServer(grpcServer, app.NewLoginServer(svcCtx))
+		grpc_server.RegisterHealthServer(grpcServer, app.NewHealthServer(svcCtx))
 	})
 	defer s.Stop()
 

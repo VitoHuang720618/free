@@ -9,13 +9,13 @@ import (
 // All implementations must embed UnimplementedHealthServer
 // 可以參考xxx.pb.go 檔案中的上述文字的下方的interface來實作
 type HealthServer struct {
-	svc *svc.Services
+	svcCtx *svc.ServiceContext
 	grpc_server.UnimplementedHealthServer
 }
 
-func NewHealthServer(svc *svc.Services) *HealthServer {
+func NewHealthServer(svcCtx *svc.ServiceContext) *HealthServer {
 	return &HealthServer{
-		svc: svc,
+		svcCtx: svcCtx,
 	}
 }
 

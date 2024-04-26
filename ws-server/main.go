@@ -22,9 +22,9 @@ func main() {
 
 	conf.MustLoad(*configFile, &c)
 
-	svc := svc.NewServices(c)
+	svcCtx := svc.NewServiceContext(c)
 
-	cm := app.NewConnectionManager(svc)
+	cm := app.NewConnectionManager(svcCtx)
 
 	//ws server 不會很多，不想搞什麼設計模式
 	// app/ 底下接續寫下去就好

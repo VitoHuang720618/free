@@ -6,13 +6,13 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
-type RedisClient struct {
+type RedisContext struct {
 	c    config.Config
 	test *redis.Client
 }
 
-func NewRedisClient(c config.Config) *RedisClient {
-	return &RedisClient{
+func NewRedisClient(c config.Config) *RedisContext {
+	return &RedisContext{
 		test: newRedis(c),
 	}
 }

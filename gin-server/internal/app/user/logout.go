@@ -9,12 +9,12 @@ import (
 )
 
 type Logout struct {
-	svc *svc.Services
+	svcCtx *svc.ServiceContext
 }
 
-func NewLogout(svc *svc.Services) *Logout {
+func NewLogout(svcCtx *svc.ServiceContext) *Logout {
 	return &Logout{
-		svc: svc,
+		svcCtx: svcCtx,
 	}
 }
 

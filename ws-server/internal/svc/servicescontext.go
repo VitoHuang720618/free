@@ -4,12 +4,12 @@ import "free/ws-server/internal/config"
 
 // import "free/gin-server/internal/config"
 
-type Services struct {
+type ServiceContext struct {
 	Config config.Config
 }
 
-func NewServices(c config.Config) *Services {
-	return &Services{
+func NewServiceContext(c config.Config) *ServiceContext {
+	return &ServiceContext{
 		Config: c,
 	}
 }

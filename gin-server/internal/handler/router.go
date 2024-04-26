@@ -14,13 +14,13 @@ type App struct {
 	Router []IRouter
 }
 
-func RegisterHandlers(svc *svc.Services) *gin.Engine {
+func RegisterHandlers(svcCtx *svc.ServiceContext) *gin.Engine {
 	r := gin.Default()
 	app := &App{
 		Router: []IRouter{
 			// add here
-			NewShopRouter(svc),
-			NewUserRouter(svc),
+			NewShopRouter(svcCtx),
+			NewUserRouter(svcCtx),
 		},
 	}
 	app.registerHandlers(r)

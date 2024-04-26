@@ -9,12 +9,12 @@ import (
 )
 
 type OrderStruct struct {
-	ctx *svc.Services
+	svcCtx *svc.ServiceContext
 }
 
-func NewOrderStruct(svc *svc.Services) *OrderStruct {
+func NewOrderStruct(svcCtx *svc.ServiceContext) *OrderStruct {
 	return &OrderStruct{
-		ctx: svc,
+		svcCtx: svcCtx,
 	}
 }
 

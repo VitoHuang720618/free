@@ -8,13 +8,13 @@ import (
 )
 
 type ConnectionManager struct {
-	svc      *svc.Services
+	svcCtx   *svc.ServiceContext
 	upgrader websocket.Upgrader
 }
 
-func NewConnectionManager(svc *svc.Services) *ConnectionManager {
+func NewConnectionManager(svcCtx *svc.ServiceContext) *ConnectionManager {
 	return &ConnectionManager{
-		svc: svc,
+		svcCtx: svcCtx,
 		upgrader: websocket.Upgrader{
 			ReadBufferSize:  1024,
 			WriteBufferSize: 1024,
