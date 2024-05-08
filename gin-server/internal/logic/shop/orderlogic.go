@@ -1,22 +1,20 @@
 package shop
 
 import (
-	"context"
+	"free/gin-server/internal/svc"
+	"github.com/gin-gonic/gin"
 	"net/http"
 
-	"free/gin-server/internal/svc"
-
-	"github.com/gin-gonic/gin"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type OrderLogic struct {
 	logx.Logger
-	ctx    context.Context
+	ctx    *gin.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderLogic {
+func NewOrderLogic(ctx *gin.Context, svcCtx *svc.ServiceContext) *OrderLogic {
 	return &OrderLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
@@ -24,8 +22,10 @@ func NewOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderLogic 
 	}
 }
 
-func (o *OrderLogic) Order(g *gin.Context) {
-	g.JSON(http.StatusOK, gin.H{
+func (o *OrderLogic) Order() {
+	//logc.Info(o.ctx, "order logic func")
+	//o.Logger.Info("hello i am logic  func !! mother fuck")
+	o.ctx.JSON(http.StatusOK, gin.H{
 		"message": "Hello order func",
 	})
 }

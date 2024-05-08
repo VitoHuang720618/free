@@ -29,8 +29,7 @@ func main() {
 	conf.MustLoad(*configFile, &c)
 
 	svcCtx := svc.NewServiceContext(c)
-	//api 會很多，別regist 在main裡
-	//共用的往grpc-server丟
+
 	r := handler.RegisterHandlers(svcCtx)
 
 	fmt.Printf("Starting server at %s:%s...\n", c.Host, c.Port)

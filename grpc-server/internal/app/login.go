@@ -16,6 +16,7 @@ type LoginServer interface {
 */
 
 type LoginServer struct {
+	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	grpc_server.UnimplementedLoginServer
 }
