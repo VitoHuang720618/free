@@ -1,10 +1,9 @@
 package shop
 
 import (
+	"free/gin-server/internal/entities/shopentities"
 	"free/gin-server/internal/svc"
 	"github.com/gin-gonic/gin"
-	"net/http"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -22,10 +21,6 @@ func NewOrderLogic(ctx *gin.Context, svcCtx *svc.ServiceContext) *OrderLogic {
 	}
 }
 
-func (o *OrderLogic) Order() {
-	//logc.Info(o.ctx, "order logic func")
-	//o.Logger.Info("hello i am logic  func !! mother fuck")
-	o.ctx.JSON(http.StatusOK, gin.H{
-		"message": "Hello order func",
-	})
+func (o *OrderLogic) Order(req *shopentities.OrderReq) (resp *shopentities.OrderResp, err error) {
+	return resp, nil
 }
