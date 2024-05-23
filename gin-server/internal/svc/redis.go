@@ -7,17 +7,16 @@ import (
 )
 
 type RedisContext struct {
-	c    config.Config
-	test *redis.Client
+	Client *redis.Client
 }
 
 func NewRedisClient(c config.Config) *RedisContext {
 	return &RedisContext{
-		test: newRedis(c),
+		Client: newRedis(&c),
 	}
 }
 
-func newRedis(c config.Config) *redis.Client {
+func newRedis(c *config.Config) *redis.Client {
 	return redis.NewClient(
 		&redis.Options{
 			Addr:     c.Redis.Host,

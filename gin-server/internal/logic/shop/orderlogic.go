@@ -1,8 +1,12 @@
 package shop
 
 import (
+	"errors"
 	"free/gin-server/internal/entities/shopentities"
 	"free/gin-server/internal/svc"
+	"math/rand"
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -22,5 +26,15 @@ func NewOrderLogic(ctx *gin.Context, svcCtx *svc.ServiceContext) *OrderLogic {
 }
 
 func (o *OrderLogic) Order(req *shopentities.OrderReq) (resp *shopentities.OrderResp, err error) {
-	return resp, nil
+	source := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(source)
+	num := r.Intn(100)
+	if num%4 == 0 {
+		return resp, nil
+	} else if num%5 == 0 {
+		return nil, errors.New("555")
+	} else {
+		return nil, errors.New("dummy")
+	}
+	// return resp, nil
 }
